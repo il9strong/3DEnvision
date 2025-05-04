@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+$black-color: #1c1c1c;
+$white-color: #fff;
+$main-font: 'Montserrat';
+
+@mixin transition($properties) {
+	transition: $properties 0.3s ease;
+}
+
+@mixin button-styles($bg-color, $text-color) {
+	padding: 5px 20px;
+	background: $bg-color;
+	border: none;
+	color: $text-color;
+	border-radius: 7px;
+	cursor: pointer;
+
+	@include transition(all);
+
+	&:hover {
+		transform: translateY(-5px);
+	}
+
+	&:active {
+		transform: scale(0.9);
+	}
+}
+
+@mixin input-styles($border-color) {
+	padding: 5px 10px;
+	border-radius: 7px;
+	border: 2px solid $border-color;
+	transition: 0.3s ease all;
+
+	&:hover {
+		opacity: 0.7;
+	}
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	bottom: 0;
+}
+
+html {
+	background-image: url('@/assets/img/background2.jpg');
+	background-position: end;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	scroll-behavior: smooth;
+}
+
+body {
+	color: $black-color;
+}
+
+body,
+button,
+input,
+textarea {
+	font-family: $main-font;
+}
+
+main {
+	margin: 0 auto;
+	min-height: 80vh;
+}
+
+.wrapper {
+	width: 1530px;
+}
+
+.modelsList {
+	display: flex;
+	gap: 30px;
+	flex-wrap: wrap;
+	width: 100%;
+	margin: 57px auto 158px auto;
+}
+
+.catalog,
+.favorites {
+	.wrapper {
+		margin: 0 auto;
+		margin-top: 77px;
+	}
+
+	.title {
+		display: flex;
+		justify-content: space-between;
+
+		.sortSelector {
+			margin-top: 30px;
+		}
+
+		h3 {
+			font-size: 36px;
+			text-transform: uppercase;
+			letter-spacing: 0.16em;
+		}
+	}
+}
+
+.modalWrapper {
+	z-index: 2000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	backdrop-filter: blur(15px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	visibility: hidden;
+	transition:
+		opacity 0.3s ease,
+		visibility 0.3s ease;
+
+	&.visible {
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+.authBlock,
+.regBlock {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	background: $white-color;
+	width: 40%;
+	padding: 25px;
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+	h3 {
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		font-size: 32px;
+		text-align: center;
+	}
+}
+
+.authForm,
+.regForm {
+	margin-top: 15%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	row-gap: 30px;
+
+	label,
+	input,
+	button {
+		font-size: 24px;
+	}
+
+	label {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+
+	input {
+		@include input-styles($black-color);
+	}
+
+	button {
+		@include button-styles($black-color, $white-color);
+	}
+}
+
+.closeButton {
+	display: flex;
+	cursor: pointer;
+	height: fit-content;
+	width: fit-content;
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	right: 20px;
+	top: 20px;
+	background: none;
+	border: none;
+	@include transition(all);
+
+	&:hover {
+		opacity: 0.7;
+	}
+}
+
+.catalog,
+.favorites {
+	.title {
+		.searchBlock {
+			display: flex;
+			flex-direction: column;
+			align-items: end;
+		}
+
+		.searchString {
+			font-size: 26px;
+			font-family: $main-font;
+			letter-spacing: 0.1em;
+			font-weight: 600;
+			width: 800px;
+			padding: 10px 20px;
+			border-radius: 7px;
+			border: 3px solid $black-color;
+			background: $white-color;
+			@include transition(all);
+
+			&:hover {
+				background: rgba($white-color, 0.7);
+			}
+
+			&:focus {
+				background: $white-color;
+				opacity: 1;
+			}
+		}
+	}
+}

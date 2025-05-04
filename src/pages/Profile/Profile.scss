@@ -1,0 +1,67 @@
+.profile {
+	.wrapper {
+		margin: 77px auto;
+
+		display: flex;
+		flex-direction: column;
+		row-gap: 30px;
+	}
+
+	h2 {
+		font-size: 36px;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		margin: 0 auto;
+	}
+
+	.profileFields {
+		display: flex;
+		flex-direction: column;
+		row-gap: 15px;
+		align-items: center;
+	}
+
+	label,
+	input,
+	button {
+		font-size: 24px;
+	}
+
+	label {
+		display: flex;
+		flex-direction: column;
+
+		width: 30%;
+	}
+
+	input {
+		padding: 5px 10px;
+		border-radius: 7px;
+		border: 2px solid #1c1c1c;
+
+		transition: 0.3s ease all;
+
+		&:hover {
+			background: rgba($color: #fff, $alpha: 0.7);
+		}
+	}
+
+	button {
+		cursor: pointer;
+
+		padding: 5px 20px;
+		background: #1c1c1c;
+		border: none;
+		color: #fff;
+		border-radius: 7px;
+
+		transition: 0.3s ease all;
+
+		&:hover {
+			transform: translateY(-5px);
+		}
+		&:active {
+			transform: scale(0.9);
+		}
+	}
+}

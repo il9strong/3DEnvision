@@ -1,0 +1,66 @@
+footer {
+	display: flex;
+	justify-content: center;
+
+	background: #1c1c1c;
+	height: 330px;
+
+	color: white;
+
+	font-size: 24px;
+
+	.wrapper {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 60px;
+	}
+
+	a {
+		color: white;
+		text-decoration: none;
+		transition: 0.3s ease all;
+
+		&:hover {
+			opacity: 0.7;
+		}
+	}
+
+	ul {
+		padding: 0;
+	}
+
+	li {
+		list-style: none;
+	}
+
+	.navigation,
+	.networks,
+	.contacts,
+	.copyright {
+		width: 15%;
+
+		h4 {
+			margin-bottom: 10px;
+		}
+	}
+
+	.contacts,
+	.copyright {
+		text-align: right;
+	}
+
+	.networks {
+		div {
+			display: flex;
+			column-gap: 10px;
+		}
+	}
+
+	.navigation {
+		ul {
+			display: flex;
+			flex-direction: column;
+			row-gap: 10px;
+		}
+	}
+}

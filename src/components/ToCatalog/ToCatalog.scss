@@ -1,0 +1,64 @@
+.toCatalog {
+	background-image: url('@/assets/img/83797579.jpg');
+	background-repeat: no-repeat;
+	background-position: end;
+	background-size: cover;
+
+	width: 100%;
+	min-height: 850px;
+}
+
+.toCatalogBlock {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	row-gap: 50px;
+
+	height: 850px;
+	width: 40%;
+
+	border-radius: 0 40px 40px 0;
+
+	background-color: rgba($color: #fff, $alpha: 0.3);
+	backdrop-filter: blur(10px);
+
+	box-shadow: 10px 0px 10px -5px rgba(34, 60, 80, 0.2);
+
+	p,
+	a {
+		letter-spacing: 0.16em;
+		font-weight: 600;
+		text-transform: uppercase;
+		color: white;
+
+	}
+
+	p {
+		width: 70%;
+		font-size: 40px;
+	}
+
+	a {
+		display: flex;
+		align-items: center;
+
+		font-size: 36px;
+		text-decoration: none;
+		color: white;
+
+		transition: 0.3s ease all;
+
+		img {
+			width: 60px;
+			transform: rotate(-90deg);
+		}
+
+		&:hover {
+			img {
+				transform: rotate(-90deg) translateY(20px);
+				transition: 0.3s ease all;
+			}
+		}
+	}
+}

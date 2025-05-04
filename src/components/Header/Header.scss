@@ -1,0 +1,68 @@
+header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	height: 100px;
+	width: 100%;
+
+	background: radial-gradient(
+		32.73% 523.75% at 50.86% 50%,
+		#ffffff 0%,
+		#ffffff 100%
+	);
+}
+
+.topBar {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+
+	width: 1530px;
+
+	ul {
+		display: flex;
+		flex-direction: row;
+	}
+
+	li {
+		list-style: none;
+	}
+
+	li,
+	button {
+		font-size: 24px;
+		font-weight: 400;
+	}
+
+	a,
+	button {
+		text-decoration: none;
+		color: #1c1c1c;
+		cursor: pointer;
+
+		transition: 0.3s ease all;
+	}
+
+	.nav,
+	.auth {
+		// width: 30%;
+		column-gap: 40px;
+	}
+
+	.auth {
+		button {
+			background: none;
+			border: none;
+		}
+	}
+
+	.nav,
+	.auth {
+		a:hover,
+		button:hover {
+			opacity: 0.6;
+		}
+	}
+}

@@ -1,0 +1,41 @@
+.categories {
+	width: 100%;
+	margin-top: 30px;
+
+	.categoriesList {
+		display: flex;
+		gap: 20px;
+		flex-wrap: wrap;
+
+		.categoryButton {
+			cursor: pointer;
+
+			font-family: Montserrat;
+			font-size: 26px;
+			letter-spacing: 0.1em;
+			color: #1c1c1c;
+
+			background: #1c1c1c00;
+			// border: 3px solid #222222;
+			border: 3px solid #1c1c1c;
+			border-radius: 7px;
+
+			padding: 5px 20px;
+
+			transition: 0.3s ease all;
+
+			&:hover {
+				transform: translateY(-5px);
+			}
+
+			&:active {
+				transform: scale(0.9);
+			}
+		}
+
+		.active {
+			background: #1C1C1c;
+			color: #fff;
+		}
+	}
+}
