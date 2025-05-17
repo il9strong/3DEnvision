@@ -2,14 +2,16 @@ import './Categories.scss';
 
 import React, { useState } from 'react';
 
-import { categories } from '@/temporaryDataBase/dataBase';
+import { CategoriesProps } from '@/interfaces/interfaces';
 
-export default function Categories() {
+export default function Categories({ onSelectCategory, categories }: CategoriesProps) {
 	const [selectedCategory, setCategory] = useState('All');
 
 	const handleClick = (categoryName: string) => {
 		setCategory(categoryName);
+		onSelectCategory(categoryName);
 	};
+
 	return (
 		<div className="categories">
 			<div className="categoriesList">
@@ -23,10 +25,10 @@ export default function Categories() {
 				{categories.map((category) => (
 					<button
 						key={category.id}
-						onClick={() => handleClick(category.categoryName)}
-						className={`categoryButton ${selectedCategory === category.categoryName ? 'active' : ''}`}
+						onClick={() => handleClick(category.name)}
+						className={`categoryButton ${selectedCategory === category.name ? 'active' : ''}`}
 					>
-						{category.categoryName}
+						{category.name}
 					</button>
 				))}
 			</div>

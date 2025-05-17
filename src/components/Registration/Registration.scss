@@ -1,3 +1,9 @@
 .regBlock {
 	height: 80vh;
+
+	.error,
+	.success {
+		margin-top: 15px;
+		font-size: 18px;
+	}
 }

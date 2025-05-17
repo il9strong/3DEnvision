@@ -21,9 +21,16 @@
 		align-items: center;
 	}
 
+	.editButtons {
+		display: flex;
+		column-gap: 15px;
+	}
+
 	label,
 	input,
-	button {
+	.editButton,
+	.saveButton,
+	.cancelButton {
 		font-size: 24px;
 	}
 
@@ -46,7 +53,9 @@
 		}
 	}
 
-	button {
+	.editButton,
+	.saveButton,
+	.cancelButton {
 		cursor: pointer;
 
 		padding: 5px 20px;

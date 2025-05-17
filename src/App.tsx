@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Layout from '@/components/Layout/Layout';
 import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
+import { AuthProvider } from '@/context/AuthContext';
 import About from '@/pages/About/About';
 import Catalog from '@/pages/Catalog/Catalog';
 import Favorites from '@/pages/Favorites/Favorites';
@@ -13,66 +14,68 @@ import Upload from '@/pages/Upload/Upload';
 
 export default function App() {
 	return (
-		<BrowserRouter>
-			<ScrollToTop />
-			<Routes>
-				<Route
-					path="/"
-					element={
-						<Layout>
-							<Home />
-						</Layout>
-					}
-				/>
-				<Route
-					path="/catalog"
-					element={
-						<Layout>
-							<Catalog />
-						</Layout>
-					}
-				/>
-				<Route
-					path="/favorites"
-					element={
-						<Layout>
-							<Favorites />
-						</Layout>
-					}
-				/>
-				<Route
-					path="/model"
-					element={
-						<Layout>
-							<FullModel />
-						</Layout>
-					}
-				/>
-				<Route
-					path="/upload"
-					element={
-						<Layout>
-							<Upload />
-						</Layout>
-					}
-				/>
-				<Route
-					path="/profile"
-					element={
-						<Layout>
-							<Profile />
-						</Layout>
-					}
-				/>
-				<Route
-					path="/about"
-					element={
-						<Layout>
-							<About />
-						</Layout>
-					}
-				/>
-			</Routes>
-		</BrowserRouter>
+		<AuthProvider>
+			<BrowserRouter>
+				<ScrollToTop />
+				<Routes>
+					<Route
+						path="/"
+						element={
+							<Layout>
+								<Home />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/catalog"
+						element={
+							<Layout>
+								<Catalog />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/favorites"
+						element={
+							<Layout>
+								<Favorites />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/model"
+						element={
+							<Layout>
+								<FullModel />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/upload"
+						element={
+							<Layout>
+								<Upload />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/profile"
+						element={
+							<Layout>
+								<Profile />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/about"
+						element={
+							<Layout>
+								<About />
+							</Layout>
+						}
+					/>
+				</Routes>
+			</BrowserRouter>
+		</AuthProvider>
 	);
 }

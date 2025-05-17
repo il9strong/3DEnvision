@@ -1,27 +1,53 @@
 import './Topics.scss';
 
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
+import Loader from '@/components/Loader/Loader';
 import ModelCard from '@/components/ModelCard/ModelCard';
-import { models } from '@/temporaryDataBase/dataBase';
+import { Model } from '@/interfaces/interfaces';
 
 export default function Topics() {
-	const topicsModels = models.slice(0, 6);
+	const [models, setModels] = useState<Model[]>([]);
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		const fetchModels = async () => {
+			try {
+				setIsLoading(true);
+				const response = await axios.get('http://localhost:3001/models');
+				console.log(response.data);
+				setModels(response.data.requestBody.slice(0, 6));
+			} catch (error) {
+				console.error('Ошибка при загрузке моделей:', error);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchModels();
+	}, []);
 
 	return (
 		<section id="topics" className="topicsBlock">
 			<div className="wrapper">
 				<h3>Topics for you</h3>
-				<div className="modelsList">
-					{topicsModels.map(model => 
-						<ModelCard 
-							key={model.id} 
-							id={model.id}
-							modelName={model.modelName}
-							modelAuthor={model.modelAuthor}
-						/>
-					)}
-				</div>
+				{isLoading ? (
+					<Loader />
+				) : (
+					<div className="modelsList">
+						{models.map((model) => (
+							<ModelCard
+								key={model.id}
+								id={model.id}
+								name={model.name}
+								authorName={model.users?.[0]?.nickname ?? 'Unknown author'}
+								preview={model.preview}
+								averageRating={model.averageRating}
+							/>
+						))}
+					</div>
+				)}
 			</div>
 		</section>
 	);

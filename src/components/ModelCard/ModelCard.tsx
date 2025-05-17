@@ -3,23 +3,36 @@ import './ModelCard.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import head from '@/assets/img/gypsum_head.png';
+import noImage from '@/assets/img/no_image.png';
 import Like from '@/components/Like/Like';
 import Rating from '@/components/Rating/Rating';
+import { useAuth } from '@/hooks/useAuth';
 import { Model } from '@/interfaces/interfaces';
 
-export default function ModelCard({ modelName, modelAuthor }: Model) {
+export default function ModelCard({
+	id,
+	name,
+	authorName,
+	preview,
+	averageRating,
+}: Model) {
+	const { user } = useAuth();
+
+	const previewUrl = preview
+		? `http://localhost:3001/images/${preview}`
+		: noImage;
+
 	return (
 		<div className="modelCard">
-			<img src={head} alt="head" className="modelPreview" />
+			<img src={previewUrl} alt={name} className="modelPreview" />
 			<div className="modelCardInfo">
 				<div className="cardInfo">
-					<Link to="/model">{modelName}</Link>
-					<p>{modelAuthor}</p>
+					<Link to="/model">{name}</Link>
+					<p>{authorName}</p>
 				</div>
 				<div className="cardButtons">
-					<Like />
-					<Rating />
+					{user && <Like modelId={id} userId={user.id} />}
+					<Rating value={averageRating ?? 0} />
 				</div>
 			</div>
 		</div>

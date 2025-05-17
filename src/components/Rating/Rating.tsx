@@ -1,23 +1,20 @@
-import "./Rating.scss";
+import './Rating.scss';
 
 import React, { useState } from 'react';
 
-import ratingFill from "@/assets/img/rating_white_blank.svg";
-import ratingBlank from "@/assets/img/rating_white_fill.svg";
+import ratingBlank from '@/assets/img/rating_white_blank.svg';
+import ratingFill from '@/assets/img/rating_white_fill.svg';
+import { RatingProps } from '@/interfaces/interfaces';
 
-export default function Rating() {
-	const [isRated, setRated] = useState(false);
-
-	const handleClick = () => {
-		setRated(!isRated);
-	}
+export default function Rating({ value }: RatingProps) {
+	const displayedRating = value ? Number(value).toFixed(1) : '0.0';
 
 	return (
-		<div className='modelRating'>
-			<button onClick={handleClick}>
-				{isRated ? <img src={ratingBlank} alt="ratingBlank" /> : <img src={ratingFill} alt="ratingFill" />}
+		<div className="modelRating">
+			<button>
+				<img src={ratingFill} alt="ratingFill" />
 			</button>
-			<p>4.7</p>
+			<p>{displayedRating}</p>
 		</div>
-	)
+	);
 }

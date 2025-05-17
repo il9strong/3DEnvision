@@ -175,6 +175,10 @@ main {
 	}
 }
 
+.regForm {
+	margin-top: 5%;
+}
+
 .closeButton {
 	display: flex;
 	cursor: pointer;
@@ -225,4 +229,8 @@ main {
 			}
 		}
 	}
+}
+
+.error {
+	color: red;
 }

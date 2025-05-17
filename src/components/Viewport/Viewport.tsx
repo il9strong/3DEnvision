@@ -3,7 +3,7 @@ import { Canvas, useFrame,useThree } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
-import Model from '@/assets/models/ratusha.glb';
+import Model from '@/assets/models/theatre.glb';
 
 function MyModel() {
 	const gltf = useGLTF(Model);

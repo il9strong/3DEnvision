@@ -1,8 +1,9 @@
 import './Authorization.scss';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import close from '@/assets/img/icon_close.svg';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function Authorization({
 	isVisible,
@@ -11,6 +12,25 @@ export default function Authorization({
 	isVisible: boolean;
 	onClose: () => void;
 }) {
+	const [login, setLogin] = useState('');
+	const [password, setPassword] = useState('');
+	const [error, setError] = useState('');
+
+	const { login: loginUser } = useAuth();
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		setError('');
+
+		const success = await loginUser(login, password);
+
+		if (success) {
+			onClose();
+		} else {
+			setError('Неверный логин или пароль');
+		}
+	};
+
 	return (
 		<div className={`modalWrapper ${isVisible ? 'visible' : ''}`}>
 			<div className="authBlock">
@@ -18,16 +38,27 @@ export default function Authorization({
 					<img src={close} alt="close" className="close" />
 				</button>
 				<h3>Authorization</h3>
-				<form className="authForm">
+				<form className="authForm" onSubmit={handleSubmit}>
 					<label>
 						Login
-						<input type="text" />
+						<input
+							type="text"
+							value={login}
+							onChange={(e) => setLogin(e.target.value)}
+							required
+						/>
 					</label>
 					<label>
 						Password
-						<input type="text" />
+						<input
+							type="password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							required
+						/>
 					</label>
-					<button type='submit'>Login</button>
+					{error && <div className="error">{error}</div>}
+					<button type="submit">Login</button>
 				</form>
 			</div>
 		</div>
