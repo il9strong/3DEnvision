@@ -1,0 +1,58 @@
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	backdrop-filter: blur(15px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+
+	// Начальное состояние для анимации
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+}
+
+.modalOverlay.show {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.modalContent {
+	background: #fff;
+	padding: 20px 30px;
+	border-radius: 8px;
+	max-width: 400px;
+	width: 90%;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	text-align: center;
+
+	opacity: 0;
+	transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modalOverlay.show .modalContent {
+	opacity: 1;
+}
+
+.modalContent h2 {
+	margin-bottom: 15px;
+}
+
+.modalContent button {
+	margin-top: 20px;
+	padding: 8px 20px;
+	border: none;
+	background-color: #000000;
+	color: white;
+	border-radius: 4px;
+	transition: 0.3s ease all;
+	cursor: pointer;
+
+	&:hover {
+		transform: translateY(-5px);
+	}
+}

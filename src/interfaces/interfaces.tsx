@@ -7,7 +7,9 @@ export interface Model {
 	id: number;
 	name: string;
 	authorName: string;
+	userId?: number;
 	preview?: string;
+	fileName?: string;
 	description?: string;
 	sizes?: string;
 	memory?: string;
@@ -42,4 +44,18 @@ export interface CategoriesProps {
 
 export interface SortSelectorProps {
 	onChange: (option: string) => void;
+}
+
+export interface Comment {
+	id: number;
+	comment: string;
+	date: string;
+	user_id: number;
+	user: {
+		nickname: string;
+	};
+}
+
+export interface CommentsProps {
+	modelId: number;
 }

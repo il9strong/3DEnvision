@@ -1,12 +1,14 @@
 import { OrbitControls, useGLTF } from '@react-three/drei';
-import { Canvas, useFrame,useThree } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
-import Model from '@/assets/models/theatre.glb';
+interface MyModelProps {
+	url: string;
+}
 
-function MyModel() {
-	const gltf = useGLTF(Model);
+function MyModel({ url }: MyModelProps) {
+	const gltf = useGLTF(url);
 	const groupRef = useRef<THREE.Group>(null);
 	const controlsRef = useRef<any>(null);
 	const { camera } = useThree();
@@ -16,16 +18,12 @@ function MyModel() {
 
 	useFrame(() => {
 		if (!initialAnimationDone && groupRef.current && controlsRef.current) {
-			// Анимация позиции камеры
 			camera.position.lerp(targetPosition, 0.02);
-
-			// Анимация цели OrbitControls
 			const target = controlsRef.current.target;
 			const modelCenter = groupRef.current.position;
 			target.lerp(modelCenter, 0.02);
 			controlsRef.current.update();
 
-			// Завершение анимации
 			if (camera.position.distanceTo(targetPosition) < 0.05) {
 				camera.position.copy(targetPosition);
 				target.copy(modelCenter);
@@ -56,18 +54,22 @@ function MyModel() {
 			setTargetPosition(newCameraPosition);
 
 			if (controlsRef.current) {
-				controlsRef.current.target.copy(center); // начальное направление взгляда
+				controlsRef.current.target.copy(center);
 				controlsRef.current.update();
 			}
 		}
 	}, [camera]);
 
 	useEffect(() => {
-		if (controlsRef.current) {
-			const handleStart = () => setInitialAnimationDone(true);
-			controlsRef.current.addEventListener('start', handleStart);
-			return () => controlsRef.current.removeEventListener('start', handleStart);
-		}
+		const controls = controlsRef.current;
+		if (!controls) return;
+
+		const handleStart = () => setInitialAnimationDone(true);
+		controls.addEventListener('start', handleStart);
+
+		return () => {
+			controls?.removeEventListener('start', handleStart);
+		};
 	}, []);
 
 	return (
@@ -80,8 +82,9 @@ function MyModel() {
 	);
 }
 
+export default function Viewport({ fileName }: { fileName: string }) {
+	const modelUrl = `http://localhost:3001/assets/models/${fileName}`;
 
-export default function Viewport() {
 	return (
 		<article className="viewportBlock">
 			<Canvas className="canvas" shadows>
@@ -91,7 +94,7 @@ export default function Viewport() {
 				<directionalLight intensity={2} position={[200, 1000, -300]} />
 				<directionalLight intensity={2} position={[200, 1000, 300]} />
 
-				<MyModel />
+				<MyModel url={modelUrl} />
 			</Canvas>
 		</article>
 	);

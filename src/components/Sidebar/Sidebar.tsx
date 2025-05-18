@@ -3,37 +3,42 @@ import './Sidebar.scss';
 import React from 'react';
 
 import ModelCardSmall from '@/components/ModelCardSmall/ModelCardSmall';
-// import { models } from '@/temporaryDataBase/dataBase';
+import { Model } from '@/interfaces/interfaces';
 
-export default function Sidebar() {
-	// const modelsByAuthor = models.slice(0, 4);
-	// const otherWorks = models.slice(0, 4);
+interface SidebarProps {
+	modelsByAuthor: Model[];
+	otherModels: Model[];
+}
+
+export default function Sidebar({ modelsByAuthor, otherModels }: SidebarProps) {
 	return (
 		<aside className="sidebar">
 			<section className="moreByAuthor">
 				<h4>More by Author</h4>
 				<div className="sidebarModelsList">
-					{/* {modelsByAuthor.map((model) => (
+					{modelsByAuthor.map((model) => (
 						<ModelCardSmall
 							key={model.id}
 							id={model.id}
-							modelName={model.modelName}
-							modelAuthor={model.modelAuthor}
+							name={model.name}
+							authorName={model.authorName}
+							averageRating={model.averageRating}
 						/>
-					))} */}
+					))}
 				</div>
 			</section>
 			<section className="otherWorks">
 				<h4>Other works</h4>
 				<div className="sidebarModelsList">
-					{/* {otherWorks.map((model) => (
+					{otherModels.map((model) => (
 						<ModelCardSmall
 							key={model.id}
 							id={model.id}
-							modelName={model.modelName}
-							modelAuthor={model.modelAuthor}
+							name={model.name}
+							authorName={model.authorName}
+							averageRating={model.averageRating}
 						/>
-					))} */}
+					))}
 				</div>
 			</section>
 		</aside>

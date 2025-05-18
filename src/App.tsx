@@ -43,7 +43,7 @@ export default function App() {
 						}
 					/>
 					<Route
-						path="/model"
+						path="/model/:id"
 						element={
 							<Layout>
 								<FullModel />

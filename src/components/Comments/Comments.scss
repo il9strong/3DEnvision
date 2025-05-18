@@ -46,4 +46,23 @@
 			transform: scale(0.9);
 		}
 	}
+
+	&__login-warning {
+		font-size: 24px;
+	}
+	.comment {
+		margin-top: 1%;
+		font-size: 22px;
+		width: 100%;
+
+		white-space: normal;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+	}
+	small {
+		font-size: 16px;
+	}
+	p {
+		font-size: 20px;
+	}
 }

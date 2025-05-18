@@ -19,7 +19,7 @@ export default function ModelCard({
 	const { user } = useAuth();
 
 	const previewUrl = preview
-		? `http://localhost:3001/images/${preview}`
+		? `http://localhost:3001/assets/images/${preview}`
 		: noImage;
 
 	return (
@@ -27,7 +27,7 @@ export default function ModelCard({
 			<img src={previewUrl} alt={name} className="modelPreview" />
 			<div className="modelCardInfo">
 				<div className="cardInfo">
-					<Link to="/model">{name}</Link>
+					<Link to={`/model/${id}`}>{name}</Link>
 					<p>{authorName}</p>
 				</div>
 				<div className="cardButtons">
