@@ -61,7 +61,7 @@ export default function ModelContent({ model }: { model: Model }) {
 			setShowLoginModal(true);
 			return;
 		}
-		
+
 		try {
 			const res = await axios.get(`http://localhost:3001/ratings`);
 			const ratings = res.data.requestBody;
@@ -73,7 +73,7 @@ export default function ModelContent({ model }: { model: Model }) {
 
 			if (existing) {
 				console.log(existing.id);
-				
+
 				await axios.put(`http://localhost:3001/ratings/${existing.id}`, {
 					rating: newRating,
 					date: new Date(),
@@ -137,6 +137,26 @@ export default function ModelContent({ model }: { model: Model }) {
 		}
 	};
 
+	const handleDownload = () => {
+		axios({
+			url: `http://localhost:3001/models/download/${fileName}`,
+			method: 'GET',
+			responseType: 'blob',
+		})
+			.then((response) => {
+				const url = window.URL.createObjectURL(new Blob([response.data]));
+				const link = document.createElement('a');
+				link.href = url;
+				link.setAttribute('download', fileName || 'model.glb');
+				document.body.appendChild(link);
+				link.click();
+				link.remove();
+			})
+			.catch((error) => {
+				console.error('Ошибка при скачивании модели:', error);
+			});
+	};
+
 	return (
 		<section className="modelContent">
 			{fileName ? (
@@ -172,7 +192,7 @@ export default function ModelContent({ model }: { model: Model }) {
 						</button>
 					</div>
 				</section>
-				<button className="download">
+				<button className="download" onClick={handleDownload}>
 					Download
 					<img src={load} alt="download" />
 				</button>

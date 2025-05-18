@@ -72,9 +72,6 @@ export default function FullModel() {
 					}),
 				]);
 
-				console.log(byAuthorRes.data);
-				console.log(otherRes.data);
-				
 				setModelsByAuthor(byAuthorRes.data.requestBody);
 				setOtherModels(otherRes.data.requestBody);
 			} catch (error) {

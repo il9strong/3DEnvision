@@ -59,3 +59,9 @@ export interface Comment {
 export interface CommentsProps {
 	modelId: number;
 }
+
+
+export interface SidebarProps {
+	modelsByAuthor: Model[];
+	otherModels: Model[];
+}

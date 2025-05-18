@@ -3,7 +3,7 @@ import './ModelCardSmall.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import head from '@/assets/img/gypsum_head.png';
+import noImage from '@/assets/img/no_image.png';
 import Like from '@/components/Like/Like';
 import Rating from '@/components/Rating/Rating';
 import { useAuth } from '@/hooks/useAuth';
@@ -13,21 +13,25 @@ export default function ModelCard({
 	id,
 	name,
 	authorName,
+	preview,
 	averageRating,
 }: Model) {
 	const { user } = useAuth();
-	if (!user) return null;
+
+	const previewUrl = preview
+		? `http://localhost:3001/assets/images/${preview}`
+		: noImage;
 
 	return (
 		<div className="modelCardSmall">
-			<img src={head} alt="head" className="modelPreview" />
+			<img src={previewUrl} alt={name} className="modelPreview" />
 			<div className="modelCardInfo">
 				<div className="cardInfo">
-					<Link to="/model">{name}</Link>
+					<Link to={`/model/${id}`}>{name}</Link>
 					<p>{authorName}</p>
 				</div>
 				<div className="cardButtons">
-					<Like modelId={id} userId={user.id} />
+					{user && <Like modelId={id} userId={user.id} />}
 					<Rating value={averageRating ?? 0} />
 				</div>
 			</div>
