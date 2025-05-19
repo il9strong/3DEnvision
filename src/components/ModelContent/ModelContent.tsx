@@ -15,7 +15,7 @@ import { Model } from '@/interfaces/interfaces';
 
 export default function ModelContent({ model }: { model: Model }) {
 	const { user } = useAuth();
-	const { id, name, authorName, averageRating, sizes, description, fileName } =
+	const { id, name, authorName, memory, averageRating, description, fileName } =
 		model;
 	const [isFavorite, setFavorite] = useState(false);
 	const [loadingFavorite, setLoadingFavorite] = useState(false);
@@ -201,8 +201,8 @@ export default function ModelContent({ model }: { model: Model }) {
 					<p>{description}</p>
 				</section>
 				<section className="sizes">
-					<h2>Sizes</h2>
-					<p>{sizes}</p>
+					<h2>Memory</h2>
+					<p>{memory}</p>
 				</section>
 				<Comments modelId={model.id} />
 			</aside>
