@@ -103,6 +103,7 @@ export default function Upload() {
 	return (
 		<main className="upload">
 			<div className="wrapper">
+				<h2>Upload your model</h2>
 				<form className="addModelForm" onSubmit={handleSubmit}>
 					<section className="loadPreviewBlock">
 						<div className="imgPreview">
@@ -141,34 +142,44 @@ export default function Upload() {
 						</div>
 					</section>
 					<section className="addDescriptionBlock">
-						<input
-							type="text"
-							placeholder="Model Name"
-							value={name}
-							onChange={(e) => setName(e.target.value)}
-							required
-						/>
-						<textarea
-							className="addDescription"
-							placeholder="Description"
-							value={description}
-							onChange={(e) => setDescription(e.target.value)}
-							required
-						/>
-						<select
-							value={categoryId || ''}
-							onChange={(e) => setCategoryId(Number(e.target.value))}
-							required
-						>
-							<option value="" disabled>
-								Выберите категорию
-							</option>
-							{categories.map((category) => (
-								<option key={category.id} value={category.id}>
-									{category.name}
+						<label htmlFor="#modelName" className="modelNameLabel">
+							Model Name
+							<input
+								type="text"
+								placeholder="Model Name"
+								id="modelName"
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+								required
+							/>
+						</label>
+						<label htmlFor="#description" className="descriptionLabel">
+							Description
+							<textarea
+								className="addDescription"
+								placeholder="Description"
+								id="description"
+								value={description}
+								onChange={(e) => setDescription(e.target.value)}
+								required
+							/>
+						</label>
+						<div className="sortSelector">
+							<select
+								value={categoryId || ''}
+								onChange={(e) => setCategoryId(Number(e.target.value))}
+								required
+							>
+								<option value="" disabled>
+									Select category
 								</option>
-							))}
-						</select>
+								{categories.map((category) => (
+									<option key={category.id} value={category.id}>
+										{category.name}
+									</option>
+								))}
+							</select>
+						</div>
 					</section>
 					<button type="submit" className="submit">
 						Submit
