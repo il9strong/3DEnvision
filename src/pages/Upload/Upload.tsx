@@ -103,7 +103,7 @@ export default function Upload() {
 	return (
 		<main className="upload">
 			<div className="wrapper">
-				<h2>Upload your model</h2>
+				<h2 className='title'>Upload your model</h2>
 				<form className="addModelForm" onSubmit={handleSubmit}>
 					<section className="loadPreviewBlock">
 						<div className="imgPreview">

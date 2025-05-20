@@ -9,7 +9,7 @@
 			justify-content: space-between;
 		}
 
-		h2 {
+		.title {
 			font-size: 36px;
 			text-transform: uppercase;
 			letter-spacing: 0.16em;
@@ -107,7 +107,7 @@
 		font-size: 20px;
 		transition: 0.3s ease all;
 		border: 2px solid black;
-		&:focus {
+		&:active {
 			background: #fff;
 		}
 		&:hover {
