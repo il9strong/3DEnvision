@@ -1,0 +1,16 @@
+.wrongPage {
+	.wrapper {
+		margin: 77px auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	h2 {
+		font-size: 48px;
+		margin-bottom: 30px;
+	}
+	p {
+		font-size: 36px;
+	}
+}

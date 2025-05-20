@@ -11,6 +11,7 @@ import FullModel from '@/pages/FullModel/FullModel';
 import Home from '@/pages/Home/Home';
 import Profile from '@/pages/Profile/Profile';
 import Upload from '@/pages/Upload/Upload';
+import WrongPage from '@/pages/WrongPage/WrongPage';
 
 export default function App() {
 	return (
@@ -71,6 +72,14 @@ export default function App() {
 						element={
 							<Layout>
 								<About />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/*"
+						element={
+							<Layout>
+								<WrongPage />
 							</Layout>
 						}
 					/>
