@@ -24,23 +24,21 @@ export default function FullModel() {
 				setIsLoading(true);
 				const response = await axios.get(`http://localhost:3001/models/${id}`);
 				const rawData = response.data.requestBody;
-				console.log(rawData);
 
 				const mappedModel = {
 					id: rawData.id,
 					name: rawData.name,
 					description: rawData.description,
-					sizes: rawData.sizes,
 					memory: rawData.memory,
 					date: rawData.date,
 					category_id: Number(rawData.category_id),
 					preview: rawData.preview,
 					fileName: rawData.file_name,
 					averageRating: parseFloat(rawData.averageRating),
-					authorName: rawData.users?.[0]?.nickname || 'Unknown',
+					authorName: rawData.users?.[0]?.nickname || 'Неизвестный автор',
 					userId: rawData.users?.[0]?.id || null,
+					accessToDownload: rawData.access_to_download,
 				};
-
 				setModelData(mappedModel);
 			} catch (error) {
 				console.error('Ошибка при получении модели:', error);
@@ -57,7 +55,6 @@ export default function FullModel() {
 			if (!modelData) return;
 
 			try {
-				console.log(modelData);
 				const [byAuthorRes, otherRes] = await Promise.all([
 					axios.get(`http://localhost:3001/models/related/by-author`, {
 						params: {
@@ -90,7 +87,11 @@ export default function FullModel() {
 				) : (
 					<ModelContent model={modelData} />
 				)}
-				<Sidebar modelsByAuthor={modelsByAuthor} otherModels={otherModels} />
+				<Sidebar
+					modelsByAuthor={modelsByAuthor}
+					otherModels={otherModels}
+					modelAuthor={modelData?.authorName}
+				/>
 			</div>
 		</main>
 	);

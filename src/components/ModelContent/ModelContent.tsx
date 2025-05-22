@@ -15,8 +15,16 @@ import { Model } from '@/interfaces/interfaces';
 
 export default function ModelContent({ model }: { model: Model }) {
 	const { user } = useAuth();
-	const { id, name, authorName, memory, averageRating, description, fileName } =
-		model;
+	const {
+		id,
+		name,
+		authorName,
+		memory,
+		averageRating,
+		description,
+		fileName,
+		accessToDownload,
+	} = model;
 	const [isFavorite, setFavorite] = useState(false);
 	const [loadingFavorite, setLoadingFavorite] = useState(false);
 	const [showLoginModal, setShowLoginModal] = useState(false);
@@ -138,6 +146,7 @@ export default function ModelContent({ model }: { model: Model }) {
 	};
 
 	const handleDownload = () => {
+		if (!accessToDownload) return;
 		axios({
 			url: `http://localhost:3001/models/download/${fileName}`,
 			method: 'GET',
@@ -162,7 +171,7 @@ export default function ModelContent({ model }: { model: Model }) {
 			{fileName ? (
 				<Viewport fileName={fileName} />
 			) : (
-				<p className="noModelFile">No model file</p>
+				<p className="noModelFile">Нет файла модели</p>
 			)}
 			<aside className="modelDetails">
 				<section className="header">
@@ -185,23 +194,25 @@ export default function ModelContent({ model }: { model: Model }) {
 							className="toFavorite"
 							onClick={toggleFavorite}
 							disabled={loadingFavorite}
-							title={isFavorite ? 'Unfavorite' : 'To favorite'}
+							title={isFavorite ? 'Из избранного' : 'В избранное'}
 						>
-							{isFavorite ? 'Unfavorite' : 'To favorite'}
+							{isFavorite ? 'Из избранного' : 'В избранное'}
 							<img src={isFavorite ? likeFill : likeBlank} alt="favorite" />
 						</button>
 					</div>
 				</section>
-				<button className="download" onClick={handleDownload}>
-					Download
-					<img src={load} alt="download" />
-				</button>
+				{accessToDownload && (
+					<button className="download" onClick={handleDownload}>
+						Скачать
+						<img src={load} alt="download" />
+					</button>
+				)}
 				<section className="description">
-					<h2>Description</h2>
+					<h2>Описание</h2>
 					<p>{description}</p>
 				</section>
 				<section className="sizes">
-					<h2>Memory</h2>
+					<h2>Размер файла</h2>
 					<p>{memory}</p>
 				</section>
 				<Comments modelId={model.id} />

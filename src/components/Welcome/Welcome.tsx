@@ -7,12 +7,13 @@ import arrow from '@/assets/img/arrow_down_white.svg';
 export default function Welcome() {
 	return (
 		<div className="welcomeBlock">
-			<div className='welcomeTextBlock'>
+			<div className="welcomeTextBlock">
 				<p>
-					Explore the fascinating world of 3D modeling with our online platform!
+					Откройте для себя увлекательный мир 3D-моделирования с нашей
+					онлайн-платформой!
 				</p>
-				<a href='#topics'>
-					Explore
+				<a href="#topics">
+					Подробнее
 					<img src={arrow} alt="arrowDown" />
 				</a>
 			</div>

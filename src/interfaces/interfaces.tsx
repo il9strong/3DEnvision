@@ -17,6 +17,7 @@ export interface Model {
 	category_id?: number;
 	users?: User[];
 	averageRating?: number | null;
+	accessToDownload?: boolean;
 }
 
 export interface User {
@@ -64,4 +65,5 @@ export interface CommentsProps {
 export interface SidebarProps {
 	modelsByAuthor: Model[];
 	otherModels: Model[];
+	modelAuthor?: string;
 }

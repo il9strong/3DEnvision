@@ -34,7 +34,7 @@ export default function Registration({
 		setSuccess('');
 
 		if (formData.password !== formData.confirmPassword) {
-			setError('Passwords do not match');
+			setError('Пароли не совпадают');
 			return;
 		}
 
@@ -50,7 +50,7 @@ export default function Registration({
 			);
 
 			if (response.data.success) {
-				setSuccess('Registration successful!');
+				setSuccess('Регистрация прошла успешно!');
 				setFormData({
 					nickname: '',
 					login: '',
@@ -60,7 +60,7 @@ export default function Registration({
 				});
 			}
 		} catch (err: any) {
-			setError(err.response?.data?.message || 'Registration failed');
+			setError(err.response?.data?.message || 'Ошибка регистрации');
 		}
 	};
 
@@ -70,10 +70,10 @@ export default function Registration({
 				<button onClick={onClose} className="closeButton">
 					<img src={close} alt="close" className="close" />
 				</button>
-				<h3>Registration</h3>
+				<h3>Регистрация</h3>
 				<form className="regForm" onSubmit={handleSubmit}>
 					<label>
-						Nickname
+						Имя пользователя
 						<input
 							type="text"
 							name="nickname"
@@ -83,7 +83,7 @@ export default function Registration({
 						/>
 					</label>
 					<label>
-						Login
+						Логин
 						<input
 							type="text"
 							name="login"
@@ -102,7 +102,7 @@ export default function Registration({
 						/>
 					</label>
 					<label>
-						Password
+						Пароль
 						<input
 							type="password"
 							name="password"
@@ -112,7 +112,7 @@ export default function Registration({
 						/>
 					</label>
 					<label>
-						Confirm password
+						Подтверждение пароля
 						<input
 							type="password"
 							name="confirmPassword"
@@ -121,7 +121,7 @@ export default function Registration({
 							required
 						/>
 					</label>
-					<button type="submit">Register</button>
+					<button type="submit">Регистрация</button>
 				</form>
 				{error && <p className="error">{error}</p>}
 				{success && <p className="success">{success}</p>}

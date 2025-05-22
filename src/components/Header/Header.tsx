@@ -43,23 +43,23 @@ export default function Header() {
 					</Link>
 					<ul className="nav">
 						<li>
-							<Link to="/">Home</Link>
+							<Link to="/">Главная</Link>
 						</li>
 						<li>
-							<Link to="/catalog">Catalog</Link>
+							<Link to="/catalog">Каталог</Link>
 						</li>
 						<li>
-							<Link to="/about">About</Link>
+							<Link to="/about">О нас</Link>
 						</li>
 						{user && (
 							<li>
-								<Link to="/favorites">Favorites</Link>
+								<Link to="/favorites">Избранное</Link>
 							</li>
 						)}
 					</ul>
 					<ul className="auth">
 						<li>
-							<Link to="/upload">Upload</Link>
+							<Link to="/upload">Загрузить</Link>
 						</li>
 						{user ? (
 							<>
@@ -67,16 +67,16 @@ export default function Header() {
 									<span><Link to="/profile">{user.nickname || user.login}</Link></span>
 								</li>
 								<li>
-									<button onClick={logout}>Logout</button>
+									<button onClick={logout}>Выйти</button>
 								</li>
 							</>
 						) : (
 							<>
 								<li>
-									<button onClick={toggleAuthVisibility}>Login</button>
+									<button onClick={toggleAuthVisibility}>Войти</button>
 								</li>
 								<li>
-									<button onClick={toggleRegVisibility}>Sign Up</button>
+									<button onClick={toggleRegVisibility}>Регистрация</button>
 								</li>
 							</>
 						)}

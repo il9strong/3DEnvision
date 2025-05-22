@@ -37,10 +37,10 @@ export default function Authorization({
 				<button onClick={onClose} className="closeButton">
 					<img src={close} alt="close" className="close" />
 				</button>
-				<h3>Authorization</h3>
+				<h3>Авторизация</h3>
 				<form className="authForm" onSubmit={handleSubmit}>
 					<label>
-						Login
+						Логин
 						<input
 							type="text"
 							value={login}
@@ -49,7 +49,7 @@ export default function Authorization({
 						/>
 					</label>
 					<label>
-						Password
+						Пароль
 						<input
 							type="password"
 							value={password}
@@ -58,7 +58,7 @@ export default function Authorization({
 						/>
 					</label>
 					{error && <div className="error">{error}</div>}
-					<button type="submit">Login</button>
+					<button type="submit">Войти</button>
 				</form>
 			</div>
 		</div>

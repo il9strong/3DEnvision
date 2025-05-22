@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import Loader from '@/components/Loader/Loader';
 import ModelCard from '@/components/ModelCard/ModelCard';
 import { Model, User } from '@/interfaces/interfaces';
-// import { users } from '@/temporaryDataBase/dataBase';
 
 export default function Profile() {
 	const [isEditing, setIsEditing] = useState(false);
@@ -50,7 +49,7 @@ export default function Profile() {
 				if (data.models) {
 					const mappedModels: Model[] = data.models.map((model: Model) => ({
 						...model,
-						authorName: model.users?.[0]?.nickname || 'Неизвестно',
+						authorName: model.users?.[0]?.nickname || 'Неизвестный автор',
 						averageRating: model.averageRating ? +model.averageRating : null,
 					}));
 					setModels(mappedModels);
@@ -90,24 +89,16 @@ export default function Profile() {
 		setIsEditing(false);
 	};
 
-	const toggleEditMode = () => {
-		if (isEditing) {
-			handleSave();
-		} else {
-			setIsEditing(true);
-		}
-	};
-
 	if (isLoading) return <Loader />;
 	if (error) return <div className="error">Ошибка: {error}</div>;
 
 	return (
 		<main className="profile">
 			<div className="wrapper">
-				<h2>My profile</h2>
+				<h2>Мой профиль</h2>
 				<div className="profileFields">
 					<label htmlFor="nickname">
-						Nickname:
+						Имя пользователя:
 						<input
 							type="text"
 							id="nickname"
@@ -117,7 +108,7 @@ export default function Profile() {
 						/>
 					</label>
 					<label htmlFor="email">
-						Email:
+						E-mail:
 						<input
 							type="text"
 							id="email"
@@ -129,15 +120,15 @@ export default function Profile() {
 					{isEditing ? (
 						<div className="editButtons">
 							<button onClick={handleSave} className="saveButton">
-								Save
+								Сохранить
 							</button>
 							<button onClick={handleCancel} className="cancelButton">
-								Cancel
+								Отменить
 							</button>
 						</div>
 					) : (
 						<button onClick={() => setIsEditing(true)} className="editButton">
-							Edit
+							Изменить
 						</button>
 					)}
 				</div>

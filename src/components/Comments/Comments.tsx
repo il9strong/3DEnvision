@@ -54,7 +54,7 @@ export default function Comments({ modelId }: CommentsProps) {
 			});
 
 			const newComment: Comment = response.data.requestBody;
-			console.log('New comment:', newComment);
+			console.log('Новый комментарий:', newComment);
 
 			setComments((prev) => [newComment, ...prev]);
 			setCommentText('');
@@ -88,7 +88,7 @@ export default function Comments({ modelId }: CommentsProps) {
 
 	return (
 		<section className="comments">
-			<h2>Comments</h2>
+			<h2>Комментарии</h2>
 
 			{user && (
 				<form onSubmit={handleSubmit}>
@@ -99,14 +99,14 @@ export default function Comments({ modelId }: CommentsProps) {
 						onChange={(e) => setCommentText(e.target.value)}
 					></textarea>
 					<button type="submit" disabled={!commentText.trim()}>
-						Send
+						Отправить
 					</button>
 				</form>
 			)}
 
 			{comments.map((c) => (
 				<div key={c.id} className="comment">
-					<strong>{c.user?.nickname || 'Unknown author'}</strong>
+					<strong>{c.user?.nickname || 'Неизвестный автор'}</strong>
 					<p>{c.comment}</p>
 					<small>{new Date(c.date).toLocaleString()}</small>
 				</div>

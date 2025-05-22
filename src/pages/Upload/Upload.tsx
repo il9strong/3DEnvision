@@ -66,7 +66,7 @@ export default function Upload() {
 		}
 
 		if (!modelFile || !name || !description || !categoryId) {
-			alert('Please fill in all required fields.');
+			alert('Пожалуйста, заполните все обязательные поля.');
 			return;
 		}
 
@@ -91,11 +91,11 @@ export default function Upload() {
 				}
 			);
 			console.log(response.data);
-			alert('Model uploaded successfully!');
+			alert('Модель успешно загружена!');
 		} catch (error: any) {
-			console.error('Error uploading model:', error);
+			console.error('Ошибка загрузки модели:', error);
 			alert(
-				`Upload failed: ${error.response?.data?.message || 'Unknown error'}`
+				`Загрузка не удалась: ${error.response?.data?.message || 'Неизвестная ошибка'}`
 			);
 		}
 	};
@@ -103,14 +103,14 @@ export default function Upload() {
 	return (
 		<main className="upload">
 			<div className="wrapper">
-				<h2 className='title'>Upload your model</h2>
+				<h2 className="title">Загрузите свою модель</h2>
 				<form className="addModelForm" onSubmit={handleSubmit}>
 					<section className="loadPreviewBlock">
 						<div className="imgPreview">
 							{imagePreview ? (
 								<img src={imagePreview} alt="Preview" />
 							) : (
-								<p>No image</p>
+								<p>Нет изображения</p>
 							)}
 						</div>
 						<input
@@ -122,7 +122,7 @@ export default function Upload() {
 						/>
 						<div className="loadLabel">
 							<label htmlFor="loadImg" className="loadImg">
-								Load preview
+								Загрузить изображение
 							</label>
 							{imagePreview && <p>{imageFile?.name}</p>}
 						</div>
@@ -136,17 +136,17 @@ export default function Upload() {
 						/>
 						<div className="loadLabel">
 							<label htmlFor="loadModel" className="loadModel">
-								Load model
+								Загрузить модель
 							</label>
 							{modelFile && <p>{modelFile.name}</p>}
 						</div>
 					</section>
 					<section className="addDescriptionBlock">
 						<label htmlFor="#modelName" className="modelNameLabel">
-							Model Name
+							Название модели
 							<input
 								type="text"
-								placeholder="Model Name"
+								placeholder="Название модели"
 								id="modelName"
 								value={name}
 								onChange={(e) => setName(e.target.value)}
@@ -154,10 +154,10 @@ export default function Upload() {
 							/>
 						</label>
 						<label htmlFor="#description" className="descriptionLabel">
-							Description
+							Описание
 							<textarea
 								className="addDescription"
-								placeholder="Description"
+								placeholder="Описание"
 								id="description"
 								value={description}
 								onChange={(e) => setDescription(e.target.value)}
@@ -171,7 +171,7 @@ export default function Upload() {
 								required
 							>
 								<option value="" disabled>
-									Select category
+									Выберите категорию
 								</option>
 								{categories.map((category) => (
 									<option key={category.id} value={category.id}>
@@ -182,7 +182,7 @@ export default function Upload() {
 						</div>
 					</section>
 					<button type="submit" className="submit">
-						Submit
+						Подтвердить
 					</button>
 				</form>
 				{showLoginModal && (

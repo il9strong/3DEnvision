@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
 	entry: './src/index.tsx',
 	output: {
-		publicPath: "/",
+		publicPath: '/',
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'bundle.js',
 		clean: true,
@@ -35,7 +35,6 @@ module.exports = {
 					filename: 'assets/images/[name].[hash][ext]',
 				},
 			},
-			
 		],
 	},
 	resolve: {

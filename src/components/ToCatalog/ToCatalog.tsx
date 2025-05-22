@@ -10,11 +10,10 @@ export default function ToCatalog() {
 		<div className="toCatalog">
 			<div className="toCatalogBlock">
 				<p>
-					Take a look at our catalog to discover more amazing works and projects
-					that we are proud to present!
+				Загляните в наш каталог, чтобы открыть для себя еще больше потрясающих работ и проектов, которые мы с гордостью представляем!
 				</p>
 				<Link to="/catalog">
-					Catalog
+					Каталог
 					<img src={arrow} alt="arrow" />
 				</Link>
 			</div>

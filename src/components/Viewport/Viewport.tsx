@@ -1,4 +1,4 @@
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -9,6 +9,7 @@ interface MyModelProps {
 
 function MyModel({ url }: MyModelProps) {
 	const gltf = useGLTF(url);
+	const glassMeshes = useRef<THREE.Mesh[]>([]);
 	const groupRef = useRef<THREE.Group>(null);
 	const controlsRef = useRef<any>(null);
 	const { camera } = useThree();
@@ -16,7 +17,40 @@ function MyModel({ url }: MyModelProps) {
 	const [targetPosition, setTargetPosition] = useState(new THREE.Vector3());
 	const [initialAnimationDone, setInitialAnimationDone] = useState(false);
 
-	useFrame(() => {
+	useEffect(() => {
+		const glassArray: THREE.Mesh[] = [];
+
+		gltf.scene.traverse((child) => {
+			if (child instanceof THREE.Mesh) {
+				if (child.material.transparent) {
+					child.material.depthWrite = false;
+					child.renderOrder = 2; // Устанавливаем порядок рендеринга
+				}
+				if (child.material.name === 'Glass') {
+					child.material = new THREE.MeshPhysicalMaterial({
+						transmission: 1,
+						roughness: 0.05,
+						thickness: 0.5, // Добавляем толщину для эффекта стекла
+						metalness: 0,
+						clearcoat: 1,
+						ior: 1.5,
+						transparent: true,
+						envMapIntensity: 1,
+					});
+					glassArray.push(child);
+				}
+			}
+		});
+
+		glassMeshes.current = glassArray;
+	}, [gltf]);
+
+	useFrame(({ camera }) => {
+		// glassMeshes.current.sort((a, b) => {
+		// 	const distanceA = a.position.distanceTo(camera.position);
+		// 	const distanceB = b.position.distanceTo(camera.position);
+		// 	return distanceA - distanceB;
+		// });
 		if (!initialAnimationDone && groupRef.current && controlsRef.current) {
 			camera.position.lerp(targetPosition, 0.02);
 			const target = controlsRef.current.target;
@@ -87,12 +121,21 @@ export default function Viewport({ fileName }: { fileName: string }) {
 
 	return (
 		<article className="viewportBlock">
-			<Canvas className="canvas" shadows>
+			<Canvas
+				className="canvas"
+				shadows
+				gl={{
+					alpha: true,
+					antialias: true,
+					logarithmicDepthBuffer: true,
+				}}
+			>
 				<ambientLight intensity={0.5} />
-				<directionalLight intensity={2} position={[500, 1000, 0]} />
-				<directionalLight intensity={1} position={[-500, 1000, 0]} />
+				<Environment preset="sunset" blur={0.5} />
+				{/* <directionalLight intensity={2} position={[500, 1000, 0]} /> */}
+				{/* <directionalLight intensity={1} position={[-500, 1000, 0]} />
 				<directionalLight intensity={2} position={[200, 1000, -300]} />
-				<directionalLight intensity={2} position={[200, 1000, 300]} />
+				<directionalLight intensity={2} position={[200, 1000, 300]} /> */}
 
 				<MyModel url={modelUrl} />
 			</Canvas>

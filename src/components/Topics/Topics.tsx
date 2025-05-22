@@ -31,7 +31,7 @@ export default function Topics() {
 	return (
 		<section id="topics" className="topicsBlock">
 			<div className="wrapper">
-				<h3>Topics for you</h3>
+				<h3>Рекомендуемое</h3>
 				{isLoading ? (
 					<Loader />
 				) : (

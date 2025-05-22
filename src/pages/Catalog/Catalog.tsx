@@ -81,11 +81,11 @@ export default function Catalog() {
 		<main className="catalog">
 			<div className="wrapper">
 				<div className="title">
-					<h3>catalog</h3>
+					<h3>Каталог</h3>
 					<div className="searchBlock">
 						<input
 							type="text"
-							placeholder="Search..."
+							placeholder="Поиск..."
 							className="searchString"
 							value={searchQuery}
 							onChange={handleSearchChange}
@@ -108,7 +108,7 @@ export default function Catalog() {
 									id={model.id}
 									name={model.name}
 									authorName={
-										model.users?.[0]?.nickname ?? model.authorName ?? 'Unknown author'
+										model.users?.[0]?.nickname ?? model.authorName ?? 'Неизвестный автор'
 									}
 									preview={model.preview}
 									averageRating={model.averageRating}

@@ -20,7 +20,7 @@ export default function Categories({ onSelectCategory, categories }: CategoriesP
 					onClick={() => handleClick('All')}
 					className={`categoryButton ${selectedCategory === 'All' ? 'active' : ''}`}
 				>
-					All
+					Все
 				</button>
 				{categories.map((category) => (
 					<button

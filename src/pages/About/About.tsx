@@ -7,38 +7,42 @@ export default function About() {
 	return (
 		<main className="about">
 			<div className="wrapper">
-				<h2>About Our Website</h2>
+				<h2>О нашем сайте</h2>
 				<p>
-					Welcome to our platform! Here, you can explore a vast collection of 3D
-					models across various categories, download models for your projects,
-					and even upload your own creations to share with the community.
+					Добро пожаловать на нашу платформу! Здесь вы можете изучить обширную
+					коллекцию 3D-моделей в различных категориях, скачать модели для своих
+					проектов, и даже загрузить собственные творения, чтобы поделиться ими
+					с сообществом.
 				</p>
-				<h3>Features of Our Platform</h3>
+				<h3>Возможности нашей платформы</h3>
 				<ul>
 					<li>
-						<strong>Browse 3D Models:</strong> Discover models in categories
-						such as humans, animals, architecture, and more.
+						<strong>Просмотр 3D-моделей:</strong> Откройте для себя модели в
+						таких категориях, как персонажи, животные, архитектура и многое
+						другое.
 					</li>
 					<li>
-						<strong>Download Models:</strong> Easily download 3D models to use
-						in your personal or professional projects.
+						<strong>Скачать модели:</strong> Легко скачивайте 3D-модели для
+						использования в личных или профессиональных проектах.
 					</li>
 					<li>
-						<strong>Upload Your Creations:</strong> Share your own 3D models
-						with the community by uploading them directly to our platform.
+						<strong>Загрузите свои творения:</strong> Поделитесь своими
+						3D-моделями с сообществом, загрузив их непосредственно на нашу
+						платформу.
 					</li>
 				</ul>
-				<h3>Why Choose Us?</h3>
+				<h3>Почему стоит выбрать нас?</h3>
 				<p>
-					We aim to provide a user-friendly platform for 3D enthusiasts,
-					designers, and developers to find, download, and share high-quality 3D
-					models. Whether you’re looking for inspiration or want to contribute
-					to the community, our website is the perfect place for you.
+					Мы стремимся предоставить удобную платформу для 3D-энтузиастов,
+					дизайнеров и разработчиков, чтобы находить, загружать и делиться
+					высококачественными 3D-моделями. Если вы ищете вдохновение или хотите
+					внести свой вклад в сообщество, наш веб-сайт — идеальное место для
+					вас.
 				</p>
-				<h3>Get Started</h3>
+				<h3>Начать</h3>
 				<p>
-					To begin, browse our <Link to="/catalog">catalog</Link>, or sign up to
-					upload your own models.
+					Для начала просмотрите наш <Link to="/catalog">каталог</Link>, или
+					зарегистрируйтесь, чтобы загрузить свои собственные модели.
 				</p>
 			</div>
 		</main>

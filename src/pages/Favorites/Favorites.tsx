@@ -31,7 +31,7 @@ export default function Favorites() {
 				if (data.successful && data.requestBody) {
 					const models = data.requestBody.map((fav: any) => {
 						const model = fav.model;
-						const author = model.users?.[0]?.nickname ?? 'Неизвестно';
+						const author = model.users?.[0]?.nickname ?? 'Неизвестный автор';
 
 						return {
 							id: model.id,
@@ -64,11 +64,11 @@ export default function Favorites() {
 		<main className="favorites">
 			<div className="wrapper">
 				<div className="title">
-					<h3>Favorites</h3>
+					<h3>Избранное</h3>
 					<div className="searchBlock">
 						<input
 							type="text"
-							placeholder="Search..."
+							placeholder="Поиск..."
 							className="searchString"
 							value={searchQuery}
 							onChange={(e) => setSearchQuery(e.target.value)}
