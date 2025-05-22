@@ -246,6 +246,10 @@ main {
 			padding: 0 20px;
 		}
 	}
+	.authBlock,
+	.regBlock {
+		row-gap: 30px;
+	}
 }
 @media (width <= 1200px) {
 	.catalog,
@@ -268,6 +272,29 @@ main {
 			}
 		}
 	}
+	.authBlock,
+	.regBlock {
+		width: 50%;
+		row-gap: 30px;
+		padding: 20px;
+		img {
+			width: 30px;
+		}
+
+		h3 {
+			font-size: 26px;
+		}
+	}
+	.authForm,
+	.regForm {
+		label,
+		input {
+			font-size: 22px;
+		}
+	}
+	.authForm {
+		margin-top: 0;
+	}
 }
 @media (width <= 768px) {
 	.modelsList {
@@ -285,7 +312,7 @@ main {
 
 				.searchBlock {
 					align-items: flex-start;
-					
+
 					.searchString {
 						width: 100%;
 						font-size: 22px;
@@ -293,6 +320,26 @@ main {
 					}
 				}
 			}
+		}
+	}
+	.authBlock,
+	.regBlock {
+		width: 90%;
+		row-gap: 30px;
+		padding: 20px;
+		img {
+			width: 30px;
+		}
+
+		h3 {
+			font-size: 26px;
+		}
+	}
+	.authForm,
+	.regForm {
+		label,
+		input {
+			font-size: 22px;
 		}
 	}
 }

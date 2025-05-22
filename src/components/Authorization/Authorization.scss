@@ -1,3 +1,9 @@
 .authBlock {
 	height: 60vh;
 }
+
+@media (width <= 1200px) {
+	.authBlock {
+		height: fit-content;
+	}
+}

@@ -80,6 +80,7 @@
 			position: absolute;
 			bottom: 0;
 			align-items: center;
+
 			opacity: 1;
 
 			height: 15%;
@@ -87,11 +88,11 @@
 			padding: 0 3%;
 			border-radius: 0 0 5px 5px;
 
-			background: white;
+			background: rgba(0, 0, 0, 0.4);
 
 			&:hover {
 				opacity: 1;
-				background: rgb(255, 255, 255);
+				background: rgba(0, 0, 0, 0.4);
 			}
 
 			.cardInfo {
@@ -104,7 +105,7 @@
 					white-space: nowrap;
 					overflow: hidden;
 
-					color: #1c1c1c;
+					color: white;
 
 					cursor: pointer;
 
@@ -127,8 +128,8 @@
 		}
 
 		.modelPreview {
-			border-radius: 5px 5px 0 0;
-			height: 85%;
+			border-radius: 5px;
+			height: 100%;
 		}
 	}
 }

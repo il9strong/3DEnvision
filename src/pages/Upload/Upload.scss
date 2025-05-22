@@ -126,3 +126,42 @@
 		resize: none;
 	}
 }
+
+@media (width <= 1200px) {
+	.upload {
+		.wrapper {
+			.title {
+				font-size: 32px;
+			}
+		}
+		.imgPreview {
+			width: 90%;
+		}
+		input {
+			width: 60%;
+		}
+	}
+}
+@media (width <= 768px) {
+	.upload {
+		.wrapper {
+			.title {
+				font-size: 26px;
+			}
+			p,
+			label,
+			select,
+			option,
+			button {
+				font-size: 22px;
+			}
+		}
+		.imgPreview {
+			width: 100%;
+			height: 300px;
+		}
+		input {
+			width: 100%;
+		}
+	}
+}
