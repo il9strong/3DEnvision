@@ -13,3 +13,19 @@
 		margin-top: 57px;
 	}
 }
+
+@media (width <=1200px) {
+	.topicsBlock {
+		h3 {
+			font-size: 32px;
+		}
+	}
+}
+@media (width <=768px) {
+	.topicsBlock {
+		h3 {
+			font-size: 26px;
+			margin-top: 30px;
+		}
+	}
+}

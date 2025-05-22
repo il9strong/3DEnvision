@@ -4,7 +4,7 @@
 	padding: 0;
 	margin: 0;
 	border: none;
-	
+
 	transition: 0.1s ease all;
 
 	&:hover {
@@ -13,5 +13,14 @@
 
 	&:active {
 		transform: scale(0.9);
+	}
+}
+
+@media (width <= 1200px) {
+	.likeButton {
+		filter: invert(1);
+		img {
+			width: 30px;
+		}
 	}
 }

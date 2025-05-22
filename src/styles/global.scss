@@ -234,3 +234,14 @@ main {
 .error {
 	color: red;
 }
+
+@media (width <= 1600px) {
+	.modelsList {
+		justify-content: space-evenly;
+	}
+}
+@media (width <= 768px) {
+	.modelsList {
+		margin: 30px 0;
+	}
+}

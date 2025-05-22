@@ -66,3 +66,9 @@ header {
 		}
 	}
 }
+
+@media (width <= 1600px) {
+	.topBar {
+		padding: 0 20px;
+	}
+}

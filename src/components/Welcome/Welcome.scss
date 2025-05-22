@@ -43,7 +43,7 @@
 
 		font-size: 36px;
 		transition: 0.3s ease all;
-	
+
 		img {
 			width: 70px;
 		}
@@ -57,4 +57,32 @@
 	}
 }
 
+@media (width <=1200px) {
+	.welcomeTextBlock {
+		font-size: 32px;
+		a {
+			font-size: 28px;
+		}
+		img {
+			height: 30px;
+		}
+	}
+}
 
+@media (width <= 768px) {
+	.welcomeBlock {
+		background-position: 80%;
+	}
+	.welcomeTextBlock {
+		p {
+			width: 90%;
+		}
+		font-size: 26px;
+		a {
+			font-size: 22px;
+		}
+		img {
+			height: 20px;
+		}
+	}
+}

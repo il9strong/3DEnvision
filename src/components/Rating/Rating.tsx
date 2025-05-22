@@ -1,8 +1,7 @@
 import './Rating.scss';
 
-import React, { useState } from 'react';
+import React from 'react';
 
-import ratingBlank from '@/assets/img/rating_white_blank.svg';
 import ratingFill from '@/assets/img/rating_white_fill.svg';
 import { RatingProps } from '@/interfaces/interfaces';
 

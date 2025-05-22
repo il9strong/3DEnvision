@@ -64,3 +64,79 @@ footer {
 		}
 	}
 }
+
+@media (width <= 1600px) {
+	footer {
+		.wrapper {
+			padding: 0 20px;
+		}
+		.navigation,
+		.networks,
+		.contacts,
+		.copyright {
+			width: 15%;
+		}
+		p,
+		h4,
+		a {
+			font-size: 20px;
+		}
+		.footerLogo {
+			img {
+				width: 130px;
+			}
+		}
+	}
+}
+@media (width <= 1200px) {
+	footer {
+		.navigation,
+		.networks,
+		.contacts,
+		.copyright {
+			width: 20%;
+		}
+		p,
+		h4,
+		a {
+			font-size: 18px;
+		}
+		img {
+			width: 32px;
+		}
+		.footerLogo {
+			img {
+				width: 100px;
+			}
+		}
+	}
+}
+@media (width <= 768px) {
+	footer {
+		height: 490px;
+		.wrapper {
+			flex-direction: column;
+			flex-wrap: wrap;
+			padding-bottom: 10px;
+		}
+
+		.navigation,
+		.networks,
+		.contacts,
+		.copyright {
+			width: 50%;
+			height: 200px;
+		}
+		p,
+		h4,
+		a {
+			font-size: 18px;
+		}
+		img {
+			width: 30px;
+		}
+		.footerLogo {
+			display: none;
+		}
+	}
+}
