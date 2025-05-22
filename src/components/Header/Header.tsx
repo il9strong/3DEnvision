@@ -11,6 +11,7 @@ import { useAuth } from '@/hooks/useAuth';
 export default function Header() {
 	const [isAuthVisible, setAuthVisible] = useState(false);
 	const [isRegVisible, setRegVisible] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const { user, logout } = useAuth();
 
@@ -23,16 +24,11 @@ export default function Header() {
 	};
 
 	useEffect(() => {
-		if (isAuthVisible || isRegVisible) {
-			document.body.style.overflow = 'hidden';
-		} else {
-			document.body.style.overflow = '';
-		}
-
+		document.body.style.overflow = isMenuOpen || isAuthVisible || isRegVisible ? 'hidden' : 'auto';
 		return () => {
 			document.body.style.overflow = '';
 		};
-	}, [isAuthVisible, isRegVisible]);
+	}, [isAuthVisible, isRegVisible, isMenuOpen]);
 
 	return (
 		<>
@@ -41,46 +37,53 @@ export default function Header() {
 					<Link to="/" className="logo">
 						<img src={logo} alt="Logo" />
 					</Link>
-					<ul className="nav">
-						<li>
-							<Link to="/">Главная</Link>
-						</li>
-						<li>
-							<Link to="/catalog">Каталог</Link>
-						</li>
-						<li>
-							<Link to="/about">О нас</Link>
-						</li>
-						{user && (
+					<button className={`burger-menu ${isMenuOpen ? 'active' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+					<div className={`mobile-menu ${isMenuOpen ? 'active' : ''}`}>
+						<ul className="nav">
 							<li>
-								<Link to="/favorites">Избранное</Link>
+								<Link to="/">Главная</Link>
 							</li>
-						)}
-					</ul>
-					<ul className="auth">
-						<li>
-							<Link to="/upload">Загрузить</Link>
-						</li>
-						{user ? (
-							<>
+							<li>
+								<Link to="/catalog">Каталог</Link>
+							</li>
+							<li>
+								<Link to="/about">О нас</Link>
+							</li>
+							{user && (
 								<li>
-									<span><Link to="/profile">{user.nickname || user.login}</Link></span>
+									<Link to="/favorites">Избранное</Link>
 								</li>
-								<li>
-									<button onClick={logout}>Выйти</button>
-								</li>
-							</>
-						) : (
-							<>
-								<li>
-									<button onClick={toggleAuthVisibility}>Войти</button>
-								</li>
-								<li>
-									<button onClick={toggleRegVisibility}>Регистрация</button>
-								</li>
-							</>
-						)}
-					</ul>
+							)}
+						</ul>
+						<ul className="auth">
+							<li>
+								<Link to="/upload">Загрузить</Link>
+							</li>
+							{user ? (
+								<>
+									<li>
+										<span><Link to="/profile">{user.nickname || user.login}</Link></span>
+									</li>
+									<li>
+										<button onClick={logout}>Выйти</button>
+									</li>
+								</>
+							) : (
+								<>
+									<li>
+										<button onClick={toggleAuthVisibility}>Войти</button>
+									</li>
+									<li>
+										<button onClick={toggleRegVisibility}>Регистрация</button>
+									</li>
+								</>
+							)}
+						</ul>
+					</div>
 				</div>
 			</header>
 			<Authorization isVisible={isAuthVisible} onClose={toggleAuthVisibility} />
