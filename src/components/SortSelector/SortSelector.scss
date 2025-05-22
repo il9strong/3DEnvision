@@ -28,3 +28,31 @@
 		}
 	}
 }
+
+@media (width <= 1200px) {
+	.sortSelector {
+		font-size: 26px;
+
+		column-gap: 20px;
+
+		option,
+		select {
+			font-size: 26px;
+		}
+	}
+}
+@media (width <= 768px) {
+	.sortSelector {
+		font-size: 22px;
+
+		column-gap: 20px;
+
+		select {
+			width: 100%;
+		}
+		option,
+		select {
+			font-size: 22px;
+		}
+	}
+}

@@ -34,8 +34,18 @@
 		}
 
 		.active {
-			background: #1C1C1c;
+			background: #1c1c1c;
 			color: #fff;
+		}
+	}
+}
+
+@media (width <=768px) {
+	.categories {
+		.categoriesList {
+			.categoryButton {
+				font-size: 22px;
+			}
 		}
 	}
 }
