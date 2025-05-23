@@ -7,10 +7,12 @@ import Categories from '@/components/Categories/Categories';
 import Loader from '@/components/Loader/Loader';
 import ModelCard from '@/components/ModelCard/ModelCard';
 import SortSelector from '@/components/SortSelector/SortSelector';
+import { useAuth } from '@/hooks/useAuth';
 import { Category, Model } from '@/interfaces/interfaces';
 import { sortModels } from '@/utils/sortModels';
 
 export default function Catalog() {
+	const { isAdmin, token } = useAuth();
 	const [models, setModels] = useState<Model[]>([]);
 	const [filteredModels, setFilteredModels] = useState<Model[]>([]);
 	const [selectedCategory, setSelectedCategory] = useState('All');
@@ -77,6 +79,18 @@ export default function Catalog() {
 		setSearchQuery(e.target.value);
 	};
 
+	const deleteModel = async (modelId: number) => {
+		if (!isAdmin()) return;
+		try {
+			await axios.delete(`http://localhost:3001/models/${modelId}`, {
+				headers: { Authorization: `Bearer ${token}` }
+			});
+			setModels(models.filter(model => model.id !== modelId));
+		} catch (err) {
+			console.error('Ошибка при удалении модели:', err);
+		}
+	};
+
 	return (
 		<main className="catalog">
 			<div className="wrapper">
@@ -112,6 +126,7 @@ export default function Catalog() {
 									}
 									preview={model.preview}
 									averageRating={model.averageRating}
+									onDelete={deleteModel}
 								/>
 							))}
 						</div>

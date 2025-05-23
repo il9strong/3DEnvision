@@ -5,9 +5,11 @@ import React, { useEffect, useState } from 'react';
 
 import Loader from '@/components/Loader/Loader';
 import ModelCard from '@/components/ModelCard/ModelCard';
+import { useAuth } from '@/hooks/useAuth';
 import { Model, User } from '@/interfaces/interfaces';
 
 export default function Profile() {
+	const { token, isAdmin } = useAuth();
 	const [isEditing, setIsEditing] = useState(false);
 	const [userData, setUserData] = useState<Pick<User, 'nickname' | 'email'>>({
 		nickname: '',
@@ -89,6 +91,18 @@ export default function Profile() {
 		setIsEditing(false);
 	};
 
+	const handleDelete = async (modelId: number) => {
+		if (!isAdmin()) return;
+		try {
+			await axios.delete(`http://localhost:3001/models/${modelId}`, {
+				headers: { Authorization: `Bearer ${token}` }
+			});
+			setModels(models.filter(model => model.id !== modelId));
+		} catch (err) {
+			console.error('Ошибка при удалении модели:', err);
+		}
+	};
+
 	if (isLoading) return <Loader />;
 	if (error) return <div className="error">Ошибка: {error}</div>;
 
@@ -141,6 +155,7 @@ export default function Profile() {
 							authorName={model.authorName}
 							preview={model.preview}
 							averageRating={model.averageRating}
+							onDelete={handleDelete}
 						/>
 					))}
 				</div>

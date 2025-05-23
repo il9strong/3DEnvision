@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 import Loader from '@/components/Loader/Loader';
 import ModelCard from '@/components/ModelCard/ModelCard';
+import { useAuth } from '@/hooks/useAuth';
 import { Model } from '@/interfaces/interfaces';
 
 export default function Topics() {
@@ -29,6 +30,20 @@ export default function Topics() {
 		fetchModels();
 	}, []);
 
+	const { token, isAdmin } = useAuth();
+
+	const handleDelete = async (modelId: number) => {
+		if (!isAdmin()) return;
+		try {
+			await axios.delete(`http://localhost:3001/models/${modelId}`, {
+				headers: { Authorization: `Bearer ${token}` }
+			});
+			setModels(models.filter(model => model.id !== modelId));
+		} catch (err) {
+			console.error('Ошибка при удалении модели:', err);
+		}
+	};
+
 	return (
 		<section id="topics" className="topicsBlock">
 			<div className="wrapper">
@@ -45,6 +60,7 @@ export default function Topics() {
 								authorName={model.users?.[0]?.nickname ?? 'Unknown author'}
 								preview={model.preview}
 								averageRating={model.averageRating}
+								onDelete={handleDelete}
 							/>
 						))}
 					</div>

@@ -8,6 +8,7 @@ type User = {
 	login: string;
 	email?: string;
 	nickname?: string;
+	role: 'Admin' | 'User';
 };
 
 type AuthContextType = {
@@ -16,11 +17,10 @@ type AuthContextType = {
 	login: (login: string, password: string) => Promise<boolean>;
 	logout: () => void;
 	checkAuth: () => Promise<void>;
+	isAdmin: () => boolean;
 };
 
-export const AuthContext = createContext<AuthContextType | undefined>(
-	undefined
-);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const navigate = useNavigate();
@@ -62,6 +62,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 			const response = await axios.get('http://localhost:3001/auth/me', {
 				headers: { Authorization: `Bearer ${savedToken}` },
 			});
+			console.log('User data:', response.data);
 			setUser(response.data);
 		} catch (err) {
 			console.error('Token check failed:', err);
@@ -73,8 +74,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		checkAuth();
 	}, []);
 
+	const isAdmin = (): boolean => {
+		return user?.role === 'Admin';
+	};
+
 	return (
-		<AuthContext.Provider value={{ user, token, login, logout, checkAuth }}>
+		<AuthContext.Provider value={{ user, token, login, logout, checkAuth, isAdmin }}>
 			{children}
 		</AuthContext.Provider>
 	);

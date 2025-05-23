@@ -11,7 +11,7 @@ import { Model } from '@/interfaces/interfaces';
 import { sortModels } from '@/utils/sortModels';
 
 export default function Favorites() {
-	const { user } = useAuth();
+	const { user, token, isAdmin } = useAuth();
 	const [favorites, setFavorites] = useState<Model[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [sortOption, setSortOption] = useState<string>('name');
@@ -60,6 +60,18 @@ export default function Favorites() {
 
 	const sortedFavorites = sortModels(filteredFavorites, sortOption);
 
+	const handleDelete = async (modelId: number) => {
+		if (!isAdmin()) return;
+		try {
+			await axios.delete(`http://localhost:3001/models/${modelId}`, {
+				headers: { Authorization: `Bearer ${token}` }
+			});
+			setFavorites(favorites.filter(model => model.id !== modelId));
+		} catch (err) {
+			console.error('Ошибка при удалении модели:', err);
+		}
+	};
+
 	return (
 		<main className="favorites">
 			<div className="wrapper">
@@ -88,6 +100,7 @@ export default function Favorites() {
 								authorName={model.authorName}
 								preview={model.preview}
 								averageRating={model.averageRating}
+								onDelete={handleDelete}
 							/>
 						))}
 					</div>

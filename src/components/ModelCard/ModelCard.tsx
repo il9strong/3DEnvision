@@ -15,8 +15,9 @@ export default function ModelCard({
 	authorName,
 	preview,
 	averageRating,
-}: Model) {
-	const { user } = useAuth();
+	onDelete,
+}: Model & { onDelete: (id: number) => void }) {
+	const { user, isAdmin } = useAuth();
 
 	const previewUrl = preview
 		? `http://localhost:3001/assets/images/${preview}`
@@ -35,6 +36,9 @@ export default function ModelCard({
 					<Rating value={averageRating ?? 0} />
 				</div>
 			</div>
+			{isAdmin() && (
+				<button onClick={() => onDelete(id)} className="deleteIcon"></button>
+			)}
 		</div>
 	);
 }

@@ -10,6 +10,9 @@ export default function Sidebar({
 	otherModels,
 	modelAuthor,
 }: SidebarProps) {
+	console.log(modelsByAuthor);
+	console.log(otherModels);
+
 	return (
 		<aside className="sidebar">
 			<section className="moreByAuthor">
@@ -21,7 +24,11 @@ export default function Sidebar({
 								key={model.id}
 								id={model.id}
 								name={model.name}
-								authorName={model.authorName}
+								authorName={
+									model.users?.[0]?.nickname ??
+									model.authorName ??
+									'Неизвестный автор'
+								}
 								preview={model.preview}
 								averageRating={model.averageRating}
 							/>
@@ -40,7 +47,11 @@ export default function Sidebar({
 								key={model.id}
 								id={model.id}
 								name={model.name}
-								authorName={model.authorName}
+								authorName={
+									model.users?.[0]?.nickname ??
+									model.authorName ??
+									'Неизвестный автор'
+								}
 								preview={model.preview}
 								averageRating={model.averageRating}
 							/>
