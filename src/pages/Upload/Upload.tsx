@@ -18,6 +18,7 @@ export default function Upload() {
 	const [categories, setCategories] = useState<Category[]>([]);
 	const [showLoginModal, setShowLoginModal] = useState(false);
 	const [accessToDownload, setAccessToDownload] = useState(true);
+	const [newCategoryName, setNewCategoryName] = useState('');
 
 	useEffect(() => {
 		const fetchCategories = async () => {
@@ -96,6 +97,35 @@ export default function Upload() {
 			console.error('Ошибка загрузки модели:', error);
 			alert(
 				`Загрузка не удалась: ${error.response?.data?.message || 'Неизвестная ошибка'}`
+			);
+		}
+	};
+
+	const handleAddCategory = async () => {
+		if (!newCategoryName.trim()) {
+			alert('Пожалуйста, введите название новой категории.');
+			return;
+		}
+
+		try {
+			const response = await axios.post('http://localhost:3001/categories', {
+				name: newCategoryName,
+			});
+
+			if (response.status >= 200 && response.status < 300 && response.data.requestBody) {
+				const newCategory = response.data.requestBody;
+				setCategories([...categories, newCategory]);
+				setCategoryId(newCategory.id);
+				setNewCategoryName('');
+				alert('Категория успешно добавлена!');
+			} else {
+				console.error('Ошибка при добавлении категории:', response.data.message || 'Неизвестная ошибка');
+				alert(`Не удалось добавить категорию: ${response.data.message || 'Неизвестная ошибка'}`);
+			}
+		} catch (error: any) {
+			console.error('Ошибка запроса добавления категории:', error);
+			alert(
+				`Не удалось добавить категорию: ${error.response?.data?.message || 'Неизвестная ошибка'}`
 			);
 		}
 	};
@@ -179,6 +209,15 @@ export default function Upload() {
 									</option>
 								))}
 							</select>
+						</div>
+						<div className="addCategoryInput">
+							<input
+								type="text"
+								placeholder="Новая категория"
+								value={newCategoryName}
+								onChange={(e) => setNewCategoryName(e.target.value)}
+							/>
+							<button type="button" onClick={handleAddCategory}>Добавить категорию</button>
 						</div>
 						<div className="downloadAccess">
 							<label>
