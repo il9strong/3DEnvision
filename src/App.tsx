@@ -15,8 +15,8 @@ import WrongPage from '@/pages/WrongPage/WrongPage';
 
 export default function App() {
 	return (
-		<AuthProvider>
-			<BrowserRouter>
+		<BrowserRouter>
+			<AuthProvider>
 				<ScrollToTop />
 				<Routes>
 					<Route
@@ -84,7 +84,7 @@ export default function App() {
 						}
 					/>
 				</Routes>
-			</BrowserRouter>
-		</AuthProvider>
+			</AuthProvider>
+		</BrowserRouter>
 	);
 }

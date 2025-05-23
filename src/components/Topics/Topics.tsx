@@ -15,9 +15,10 @@ export default function Topics() {
 		const fetchModels = async () => {
 			try {
 				setIsLoading(true);
-				const response = await axios.get('http://localhost:3001/models');
-				console.log(response.data);
-				setModels(response.data.requestBody.slice(0, 6));
+				const response = await axios.get(
+					'http://localhost:3001/models/top-rated'
+				);
+				setModels(response.data.requestBody);
 			} catch (error) {
 				console.error('Ошибка при загрузке моделей:', error);
 			} finally {

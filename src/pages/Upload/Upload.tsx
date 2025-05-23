@@ -17,8 +17,7 @@ export default function Upload() {
 	const [categoryId, setCategoryId] = useState<number | null>(null);
 	const [categories, setCategories] = useState<Category[]>([]);
 	const [showLoginModal, setShowLoginModal] = useState(false);
-
-	console.log(user);
+	const [accessToDownload, setAccessToDownload] = useState(true);
 
 	useEffect(() => {
 		const fetchCategories = async () => {
@@ -76,6 +75,7 @@ export default function Upload() {
 		formData.append('category_id', categoryId.toString());
 		formData.append('user_id', user?.id.toString() || '');
 		formData.append('model', modelFile);
+		formData.append('access_to_download', accessToDownload.toString());
 		if (imageFile) {
 			formData.append('preview', imageFile);
 		}
@@ -179,6 +179,16 @@ export default function Upload() {
 									</option>
 								))}
 							</select>
+						</div>
+						<div className="downloadAccess">
+							<label>
+								<input
+									type="checkbox"
+									checked={accessToDownload}
+									onChange={(e) => setAccessToDownload(e.target.checked)}
+								/>
+								Разрешить скачивание модели другим пользователям
+							</label>
 						</div>
 					</section>
 					<button type="submit" className="submit">

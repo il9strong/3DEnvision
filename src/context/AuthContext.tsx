@@ -1,6 +1,7 @@
 // src/context/AuthContext.tsx
 import axios from 'axios';
 import React, { createContext, useEffect,useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type User = {
 	id: number;
@@ -22,6 +23,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 );
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+	const navigate = useNavigate();
 	const [user, setUser] = useState<User | null>(null);
 	const [token, setToken] = useState<string | null>(
 		localStorage.getItem('token')
@@ -49,6 +51,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		setToken(null);
 		setUser(null);
 		localStorage.removeItem('token');
+		navigate('/');
 	};
 
 	const checkAuth = async () => {
