@@ -24,13 +24,13 @@ function MyModel({ url }: MyModelProps) {
 			if (child instanceof THREE.Mesh) {
 				if (child.material.transparent) {
 					child.material.depthWrite = false;
-					child.renderOrder = 2; // Устанавливаем порядок рендеринга
+					child.renderOrder = 2;
 				}
 				if (child.material.name === 'Glass') {
 					child.material = new THREE.MeshPhysicalMaterial({
 						transmission: 1,
 						roughness: 0.05,
-						thickness: 0.5, // Добавляем толщину для эффекта стекла
+						thickness: 0.5,
 						metalness: 0,
 						clearcoat: 1,
 						ior: 1.5,
@@ -46,11 +46,6 @@ function MyModel({ url }: MyModelProps) {
 	}, [gltf]);
 
 	useFrame(({ camera }) => {
-		// glassMeshes.current.sort((a, b) => {
-		// 	const distanceA = a.position.distanceTo(camera.position);
-		// 	const distanceB = b.position.distanceTo(camera.position);
-		// 	return distanceA - distanceB;
-		// });
 		if (!initialAnimationDone && groupRef.current && controlsRef.current) {
 			camera.position.lerp(targetPosition, 0.02);
 			const target = controlsRef.current.target;
