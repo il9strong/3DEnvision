@@ -14,7 +14,7 @@ export default function Upload() {
 	const [modelFile, setModelFile] = useState<File | null>(null);
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
-	const [categoryId, setCategoryId] = useState<number | null>(null);
+	const [selectedCategories, setSelectedCategories] = useState<number[]>([]); // Заменяем categoryId
 	const [categories, setCategories] = useState<Category[]>([]);
 	const [showLoginModal, setShowLoginModal] = useState(false);
 	const [accessToDownload, setAccessToDownload] = useState(true);
@@ -65,7 +65,12 @@ export default function Upload() {
 			return;
 		}
 
-		if (!modelFile || !name || !description || !categoryId) {
+		if (
+			!modelFile ||
+			!name ||
+			!description ||
+			selectedCategories.length === 0
+		) {
 			alert('Пожалуйста, заполните все обязательные поля.');
 			return;
 		}
@@ -73,8 +78,8 @@ export default function Upload() {
 		const formData = new FormData();
 		formData.append('name', name);
 		formData.append('description', description);
-		formData.append('category_id', categoryId.toString());
-		formData.append('user_id', user?.id.toString() || '');
+		formData.append('categories', JSON.stringify(selectedCategories));
+		formData.append('user_id', user.id.toString());
 		formData.append('model', modelFile);
 		formData.append('access_to_download', accessToDownload.toString());
 		if (imageFile) {
@@ -112,15 +117,23 @@ export default function Upload() {
 				name: newCategoryName,
 			});
 
-			if (response.status >= 200 && response.status < 300 && response.data.requestBody) {
+			if (
+				response.status >= 200 &&
+				response.status < 300 &&
+				response.data.requestBody
+			) {
 				const newCategory = response.data.requestBody;
 				setCategories([...categories, newCategory]);
-				setCategoryId(newCategory.id);
 				setNewCategoryName('');
 				alert('Категория успешно добавлена!');
 			} else {
-				console.error('Ошибка при добавлении категории:', response.data.message || 'Неизвестная ошибка');
-				alert(`Не удалось добавить категорию: ${response.data.message || 'Неизвестная ошибка'}`);
+				console.error(
+					'Ошибка при добавлении категории:',
+					response.data.message || 'Неизвестная ошибка'
+				);
+				alert(
+					`Не удалось добавить категорию: ${response.data.message || 'Неизвестная ошибка'}`
+				);
 			}
 		} catch (error: any) {
 			console.error('Ошибка запроса добавления категории:', error);
@@ -195,14 +208,23 @@ export default function Upload() {
 							/>
 						</label>
 						<div className="sortSelector">
+							<label htmlFor="categories-select">
+								Категории (можно выбрать несколько, для этого зажмите клавишу
+								Ctrl):
+							</label>
 							<select
-								value={categoryId || ''}
-								onChange={(e) => setCategoryId(Number(e.target.value))}
+								id="categories-select"
+								multiple
+								value={selectedCategories.map(String)}
+								onChange={(e) => {
+									const selected = Array.from(
+										e.target.selectedOptions,
+										(option) => Number(option.value)
+									);
+									setSelectedCategories(selected);
+								}}
 								required
 							>
-								<option value="" disabled>
-									Выберите категорию
-								</option>
 								{categories.map((category) => (
 									<option key={category.id} value={category.id}>
 										{category.name}
@@ -211,13 +233,23 @@ export default function Upload() {
 							</select>
 						</div>
 						<div className="addCategoryInput">
-							<input
-								type="text"
-								placeholder="Новая категория"
-								value={newCategoryName}
-								onChange={(e) => setNewCategoryName(e.target.value)}
-							/>
-							<button type="button" onClick={handleAddCategory}>Добавить категорию</button>
+							<label htmlFor="addNewCategory">
+								Добавить новую категорию:
+								<input
+									type="text"
+									placeholder="Новая категория"
+									value={newCategoryName}
+									onChange={(e) => setNewCategoryName(e.target.value)}
+									id="addNewCategory"
+								/>
+							</label>
+							<button
+								type="button"
+								onClick={handleAddCategory}
+								className="addCategoryButton"
+							>
+								Добавить категорию
+							</button>
 						</div>
 						<div className="downloadAccess">
 							<label>

@@ -16,6 +16,18 @@
 			margin-bottom: 30px;
 		}
 
+		.sortSelector {
+			display: flex;
+			flex-direction: column;
+			row-gap: 10px;
+			align-items: flex-start;
+			margin-bottom: 30px;
+
+			label {
+				font-weight: 600;
+			}
+		}
+
 		.sortSelector,
 		select,
 		option {
@@ -23,6 +35,48 @@
 		}
 		select {
 			border: 2px solid black;
+		}
+		select[multiple] {
+			width: 30%;
+			background: #ffffff00;
+			border: none;
+			padding: 0 10px 0 0;
+
+			&::-webkit-scrollbar {
+				width: 8px;
+			}
+
+			&::-webkit-scrollbar-track {
+				background: transparent;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				background: #000;
+				border-radius: 4px;
+			}
+
+			option {
+				background: #fff;
+				margin-bottom: 2px;
+				border: 2px solid black;
+				&:checked {
+					background-color: #000000;
+					color: white;
+				}
+				&:hover {
+					opacity: 0.7;
+				}
+			}
+		}
+		.addCategoryInput {
+			label {
+				font-weight: 600;
+				font-size: 24px;
+				row-gap: 10px;
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 10px;
+			}
 		}
 	}
 }
@@ -60,7 +114,8 @@
 .addModelForm {
 	.loadImg,
 	.loadModel,
-	.submit {
+	.submit,
+	.addCategoryButton {
 		cursor: pointer;
 
 		display: flex;
@@ -101,6 +156,7 @@
 		flex-direction: column;
 		font-size: 24px;
 		margin-bottom: 30px;
+		font-weight: 600;
 	}
 	input,
 	textarea {
@@ -109,8 +165,16 @@
 		font-size: 20px;
 		transition: 0.3s ease all;
 		border: 2px solid black;
+
 		&:active {
 			background: #fff;
+		}
+		&:focus {
+			opacity: 1;
+			background: #fff;
+			&:hover {
+				opacity: 1;
+			}
 		}
 		&:hover {
 			opacity: 0.7;
@@ -137,10 +201,28 @@
 		font-size: 24px;
 	}
 
-	input[type="checkbox"] {
+	input[type='checkbox'] {
 		width: 20px;
 		height: 20px;
 		cursor: pointer;
+		appearance: none;
+		border: 2px solid black;
+		border-radius: 4px;
+
+		&:checked {
+			background-color: #000;
+			position: relative;
+
+			&::after {
+				content: '✓';
+				color: white;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				font-size: 18px;
+			}
+		}
 	}
 }
 
@@ -149,6 +231,9 @@
 		.wrapper {
 			.title {
 				font-size: 32px;
+			}
+			select[multiple] {
+				width: 50%;
 			}
 		}
 		.imgPreview {
@@ -169,8 +254,12 @@
 			label,
 			select,
 			option,
-			button {
+			button,
+			.addCategoryInput label {
 				font-size: 22px;
+			}
+			select[multiple] {
+				width: 100%;
 			}
 		}
 		.imgPreview {

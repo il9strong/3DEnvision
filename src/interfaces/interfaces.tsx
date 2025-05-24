@@ -14,7 +14,7 @@ export interface Model {
 	sizes?: string;
 	memory?: string;
 	date?: string;
-	category_id?: number;
+	categories?: Category[];  // Заменяем category_id на массив категорий
 	users?: User[];
 	averageRating?: number | null;
 	accessToDownload?: boolean;

@@ -54,12 +54,9 @@ export default function Catalog() {
 		let result = [...models];
 
 		if (selectedCategory !== 'All') {
-			const categoryObj = categories.find((cat) => cat.name === selectedCategory);
-			if (categoryObj) {
-				result = result.filter(
-					(model) => Number(model.category_id) === Number(categoryObj.id)
-				);
-			}
+			result = result.filter(model => 
+				model.categories?.some(category => category.name === selectedCategory)
+			);
 		}
 
 		if (searchQuery.trim() !== '') {
@@ -69,7 +66,7 @@ export default function Catalog() {
 		}
 
 		setFilteredModels(sortModels(result, sortOption));
-	}, [models, selectedCategory, searchQuery, sortOption, categories]);
+	}, [models, selectedCategory, searchQuery, sortOption]);
 
 	const handleCategorySelect = (categoryName: string) => {
 		setSelectedCategory(categoryName);
