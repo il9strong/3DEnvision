@@ -11,9 +11,8 @@ export default function Like({ modelId, userId }: LikeProps) {
 	const [isFavorite, setFavorite] = useState(false);
 	const [favoriteId, setFavoriteId] = useState<number | null>(null);
 
-	if (!userId) return null;
-
 	useEffect(() => {
+		if (!userId) return;
 		const fetchFavorites = async () => {
 			try {
 				const res = await axios.get(`http://localhost:3001/favorites`);
@@ -36,6 +35,7 @@ export default function Like({ modelId, userId }: LikeProps) {
 	}, [modelId, userId]);
 
 	const handleClick = async () => {
+		if (!userId) return;
 		try {
 			if (!isFavorite) {
 				const res = await axios.post('http://localhost:3001/favorites', {
@@ -53,6 +53,8 @@ export default function Like({ modelId, userId }: LikeProps) {
 			console.error('Ошибка при изменении избранного:', err);
 		}
 	};
+
+	if (!userId) return null;
 
 	return (
 		<button onClick={handleClick} className="likeButton">

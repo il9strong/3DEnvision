@@ -108,7 +108,7 @@ export default function Comments({ modelId }: CommentsProps) {
 				<div key={c.id} className="comment">
 					<strong>{c.user?.nickname || 'Неизвестный автор'}</strong>
 					<p>{c.comment}</p>
-					<small>{new Date(c.date).toLocaleString()}</small>
+					<small>{new Date(c.date).toLocaleDateString()}</small>
 				</div>
 			))}
 

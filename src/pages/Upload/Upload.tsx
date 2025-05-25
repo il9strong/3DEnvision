@@ -14,7 +14,7 @@ export default function Upload() {
 	const [modelFile, setModelFile] = useState<File | null>(null);
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
-	const [selectedCategories, setSelectedCategories] = useState<number[]>([]); // Заменяем categoryId
+	const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
 	const [categories, setCategories] = useState<Category[]>([]);
 	const [showLoginModal, setShowLoginModal] = useState(false);
 	const [accessToDownload, setAccessToDownload] = useState(true);
